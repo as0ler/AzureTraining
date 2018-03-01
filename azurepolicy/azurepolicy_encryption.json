@@ -2,8 +2,8 @@
     "properties": {
         "mode": "all",
         "parameters": {},
-        "displayName": "Ensure storage file encryption",
-        "description": "Ensures file encryption for storage accounts",
+        "displayName": "Ensure storage blob encryption",
+        "description": "Ensures blob encryption for storage accounts",
         "policyRule": {
             "if": {
                 "allOf": [
@@ -13,7 +13,7 @@
                     },
                     {
                         "not": {
-                            "field": "Microsoft.Storage/storageAccounts/enableFileEncryption",
+                            "field": "Microsoft.Storage/storageAccounts/enableBlobEncryption",
                             "equals": "true"
                         }
                     }

@@ -7,7 +7,7 @@
 			},
 			{
 				"not": {
-					"field": "Microsoft.Storage/storageAccounts/enableFileEncryption",
+					"field": "Microsoft.Storage/storageAccounts/enableBlobEncryption",
 					"equals": "true"
 				}
 			}
