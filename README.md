@@ -10,5 +10,5 @@ az policy definition create --name 'storage-account-blob-encryption' --display-n
 
 
 ```
-az policy assignment create --name ”Blob Encryption --scope “/subscriptions/<subscriptionid>” --policy "storage-account-blob-encryption"
+az policy assignment create --name "Blob Encryption" --scope "/subscriptions/<subscription id>" --policy "storage-account-blob-encryption”
 ```
