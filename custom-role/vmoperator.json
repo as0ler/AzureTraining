@@ -15,6 +15,6 @@
   ],
   "NotActions": [],
   "AssignableScopes": [
-    "/subscriptions/<subscriptionid>/resourceGroups/<resourceGroup>",
+    "/subscriptions/1f12c442-627d-43f7-ba52-211a641fe465/resourceGroups/TestingLab"
   ]
 }
