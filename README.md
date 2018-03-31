@@ -26,7 +26,7 @@ az policy assignment create --name "Blob Encryption" --scope "/subscriptions/<su
 
 * Step 3: Create a custom policy to permit only a deploy in a specific subnet.
 
-** Reference:  https://docs.microsoft.com/en-us/azure/virtual-network/resource-groups-networking
+  * Reference:  https://docs.microsoft.com/en-us/azure/virtual-network/resource-groups-networking
 
 azurepolicy.template.json
 ```
@@ -65,8 +65,8 @@ azurepolicy.network.parameters.json
 ```
 
 * Files:
-** azurepolicy_encryption.json: Custom policy definition.  
-** azurepolicy_encryption.parameteres.json: Parameterers to config the policy.
-** azurepolicy_encryption.rules.json: Rules of the custom policy.
-** azurepolicy.network.parameters.json: Parameter configuration to use in step 3.
-** azurepolicy.template.json: Template JSON for a policy
+  * azurepolicy_encryption.json: Custom policy definition.  
+  * azurepolicy_encryption.parameteres.json: Parameterers to config the policy.
+  * azurepolicy_encryption.rules.json: Rules of the custom policy.
+  * azurepolicy.network.parameters.json: Parameter configuration to use in step 3.
+  * azurepolicy.template.json: Template JSON for a policy
