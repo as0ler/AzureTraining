@@ -27,6 +27,8 @@ az policy assignment create --name "Blob Encryption" --scope "/subscriptions/<su
 * Step 3: Create a custom policy to permit only a deploy in a specific subnet.
 
   * Reference:  https://docs.microsoft.com/en-us/azure/virtual-network/resource-groups-networking
+  * Type: Microsoft.Network/networkInterfaces
+  * field: Microsoft.Network/networkInterfaces/ipconfigurations[\*].subnet.id
 
 azurepolicy.template.json
 ```
@@ -40,32 +42,30 @@ azurepolicy.template.json
 			{
 				"not": {
 					"field": "",
-					"equals": "[parameters('subnetId')]"
+					"equals": "<subNetId>"
 				}
 			}
 		]
 	},
 	"then": {
-		"effect": "deny"
+		"effect": ""
 	}
 }
 ```  
 
-azurepolicy.network.parameters.json
+  * To list subnet id's:
 ```
-{
-	"subnetId": {
-		"type": "string",
-		"metadata": {
-			"description": "Resource Id for Subnet",
-			"displayName": "Subnet Id"
-		}
-	}
-}
+az network vnet subnet list --resource-group "training" --vnet-name "allowedVnet"
+```
+
+
+* Clouddrive: to mount a drive to Cloudshell using a Storage Account:
+```
+clouddrive mount -s "<subscription id>" -g "<resource group>" -n "<storage account name>" -f "test"
 ```
 
 * Files:
-  * azurepolicy_encryption.json: Custom policy definition.  
+  * azurepolicy_encryption.json: Custom policy definition.  az policy definition create --name
   * azurepolicy_encryption.parameteres.json: Parameterers to config the policy.
   * azurepolicy_encryption.rules.json: Rules of the custom policy.
   * azurepolicy.network.parameters.json: Parameter configuration to use in step 3.

@@ -8,7 +8,7 @@
             {
                 "not": {
                     "field": "",
-                    "equals": "[parameters('subnetId')]"
+                    "equals": "<subnetId>"
                 }
             }
         ]
