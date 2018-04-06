@@ -1,0 +1,36 @@
+{"schemaId":"AzureMonitorMetricAlert","data":{
+  "version": "2.0",
+  "status": "Activated",
+  "context": {
+    "timestamp": "2018-04-02T19:04:12.6247249Z",
+    "id": "/subscriptions/1f12c442-627d-43f7-ba52-211a641fe465/resourceGroups/training/providers/microsoft.insights/metricAlerts/Exceed%20Outbound%20Traffic",
+    "name": "Exceed Outbound Traffic",
+    "description": "",
+    "conditionType": "SingleResourceMultipleMetricCriteria",
+    "condition": {
+      "windowSize": "PT1M",
+      "allOf": [
+        {
+          "metricName": "Network Out",
+          "dimensions": [
+            {
+              "name": "ResourceId",
+              "value": "c6680fd8-204d-4ff2-8049-949cf6c56c7e"
+            }
+          ],
+          "operator": "GreaterThan",
+          "threshold": "1",
+          "timeAggregation": "PT1M",
+          "metricValue": 1.0
+        }
+      ]
+    },
+    "subscriptionId": "1f12c442-627d-43f7-ba52-211a641fe465",
+    "resourceGroupName": "training",
+    "resourceName": "testMachine",
+    "resourceType": "Microsoft.Compute/virtualMachines",
+    "resourceId": "/subscriptions/1f12c442-627d-43f7-ba52-211a641fe465/resourceGroups/training/providers/Microsoft.Compute/virtualMachines/testMachine",
+    "portalLink": "https://portal.azure.com/#resource//subscriptions/1f12c442-627d-43f7-ba52-211a641fe465/resourceGroups/training/providers/Microsoft.Compute/virtualMachines/testMachine"
+  },
+  "properties": {}
+}}

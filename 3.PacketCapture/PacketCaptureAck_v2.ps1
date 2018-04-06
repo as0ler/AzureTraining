@@ -1,77 +1,3 @@
-# AzureTraining
-Materials for the Azure Training
-
-Include Materials needed to deploy resources in Azure.
-
-## Enabling Packet Capture via an alert
-
-0. Enable Network Watcher in your region.
-
-1. Create an Azure Function.
-  * Use a unique name.
-  * Type: Windows
-
-2. Create a new Function App.
-  * Type: HttpTrigger-Powershell
-  * Language: Powershell
-  * Name: AlertPacketCapturePowerShell
-  * Auth: Function
-
-3. Try the Function. Execute the 'Run' command.
-
-4. Add the next modules to the function inside a folder called "azuremodules", using App Service Editor:
-  * AzureRM.Network
-  * AzureRM.Profile
-  * AzureRM.Resources
-
-5. Create a new App in Active Directory.
-  * Select a Name (f.ex. Automation_Example)
-  * Type: Web app
-  * Select an URL (f.ex. http://example.org)
-
-6. In App Registration Settings, create a Key:
-  * Create a new Key.
-  * Define a duration.
-  * Copy the value once saved.
-
-7. In "IAM" blade from the subscription used:
-  * Add the application as a valid role (f.ex. Owner).
-
-8. Obtain the tenant id in Active Directory:
-  * Active Directory -> Properties
-  * Copy the value "DirectoryID"
-
-9. Create the next Environment variables:
-  * AzureTenant
-  * AzureCredPassword
-  * AzureClientId
-
-10. Create a virtual Machine:
-  * Type: Ubuntu Linux
-  * Name: testMachine
-  * Enable Extension Network Watcher
-
-11. Create a new Managed Rule (Monitor -> Alerts)
-  * Target: testMachine
-  * Criteria: NetworkIn
-  * Threshold: 1 byte
-  * Period: 1 minute
-  * Frequency: 1 minute
-  * Alert Name: Exceeded Inbound Traffic
-  * Description: Exceeded Inbound Traffic
-  * New Action Group: 
-    * Name: CaptureAutomation
-    * ShortName: Capture
-    * ResourceGroup: training
-    * Action Name: CaptureDispatch
-    * URL: Function URL
-
-12. Add the next script and modify:
-  * Import Modules Paths
-  * StorageAccountId
-  * subscriptionID
-
-```
 $input = Get-Content $req -Raw
 Out-File -Encoding Ascii -FilePath "D:\home\site\wwwroot\AlertPacketCapturePowershell\output.txt" -inputObject $input
 
@@ -112,7 +38,7 @@ if($requestBody.data.context.resourceType -eq "Microsoft.Compute/virtualMachines
     Write-Output ("Resource Type:  {0}" -f $requestBody.data.context.resourceType)
 
     #Get the Network Watcher in the VM's region
-    $nw = Get-AzurermResource | Where {$_.ResourceType -eq "Microsoft.Network/networkWatchers" -and $_.Location -eq $requestBody.context.resourceRegion}
+    $nw = Get-AzurermResource | Where {$_.ResourceType -eq "Microsoft.Network/networkWatchers" -and $_.Location -eq 'westeurope'}
     $networkWatcher = Get-AzureRmNetworkWatcher -Name $nw.Name -ResourceGroupName $nw.ResourceGroupName
 
     #Get existing packetCaptures
@@ -127,15 +53,7 @@ if($requestBody.data.context.resourceType -eq "Microsoft.Compute/virtualMachines
     #Initiate packet capture on the VM that fired the alert
     if ((Get-AzureRmNetworkWatcherPacketCapture -NetworkWatcher $networkWatcher).Count -lt $packetCaptureLimit){
         echo "Initiating Packet Capture"
-        New-AzureRmNetworkWatcherPacketCapture -NetworkWatcher $networkWatcher -TargetVirtualMachineId $requestBody.context.resourceId -PacketCaptureName $packetCaptureName -StorageAccountId $storageaccountid -TimeLimitInSeconds $packetCaptureDuration
-        Out-File -Encoding Ascii -FilePath $res -inputObject "Packet Capture created on ${requestBody.context.resourceID}"
+        New-AzureRmNetworkWatcherPacketCapture -NetworkWatcher $networkWatcher -TargetVirtualMachineId $requestBody.data.context.resourceId -PacketCaptureName $packetCaptureName -StorageAccountId $storageaccountid -TimeLimitInSeconds $packetCaptureDuration
+        Out-File -Encoding Ascii -FilePath $res -inputObject "Packet Capture created on ${requestBody.data.context.resourceId}"
     }
 }
-```
-
-
-To test the function, use the next test alert:
-
-```
-curl -vX POST "<URL Function>" -d @request.json --header "Content-Type: application/json" -vvvvv
-```
