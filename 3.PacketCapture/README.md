@@ -35,21 +35,29 @@ Include Materials needed to deploy resources in Azure.
   * Copy the value once saved.
 
 7. In "IAM" blade from the subscription used:
-  * Add the application as a valid role (f.ex. Owner).
+  * Go to "subscriptions" panel.
+  * Select your subscription.
+  * Go to "IAM" blade.
+  * Add a new permission.
+  * Add the application as "Owner".
 
 8. Obtain the tenant id in Active Directory:
   * Active Directory -> Properties
   * Copy the value "DirectoryID"
 
 9. Create the next Environment variables:
-  * AzureTenant
-  * AzureCredPassword
-  * AzureClientId
+  * Go to App Services
+  * Select your function, and go to "Platform features".
+  * Select "Application settings"
+  * In "Application settings" section, create the next environment variables:
+    * AzureTenant
+    * AzureCredPassword
+    * AzureClientId
 
 10. Create a virtual Machine:
   * Type: Ubuntu Linux
   * Name: testMachine
-  * Enable Extension Network Watcher
+  * In "Extensions blade", enable the Extension Network Watcher.
 
 11. Create a new Managed Rule (Monitor -> Alerts)
   * Target: testMachine
@@ -66,10 +74,9 @@ Include Materials needed to deploy resources in Azure.
     * Action Name: CaptureDispatch
     * URL: Function URL
 
-12. Add the next script and modify:
-  * Import Modules Paths
-  * StorageAccountId
-  * subscriptionID
+12. Add the next script and modify, without "<" ">" the next variables:
+  * funcion_name: Function Name
+  * StorageAccountId: Storage Account URL where captures will be stored.
 
 ```
 $input = Get-Content $req -Raw
@@ -77,15 +84,15 @@ Out-File -Encoding Ascii -FilePath "D:\home\site\wwwroot\AlertPacketCapturePower
 
 
 #Import Azure PowerShell modules required to make calls to Network Watcher
-Import-Module "D:\home\site\wwwroot\AlertPacketCapturePowershell\azuremodules\AzureRM.Profile\AzureRM.Profile.psd1" -Global
-Import-Module "D:\home\site\wwwroot\AlertPacketCapturePowershell\azuremodules\AzureRM.Network\AzureRM.Network.psd1" -Global
-Import-Module "D:\home\site\wwwroot\AlertPacketCapturePowershell\azuremodules\AzureRM.Resources\AzureRM.Resources.psd1" -Global
+Import-Module "D:\home\site\wwwroot\<function_name>\azuremodules\AzureRM.Profile\AzureRM.Profile.psd1" -Global
+Import-Module "D:\home\site\wwwroot\<function_name>\azuremodules\AzureRM.Network\AzureRM.Network.psd1" -Global
+Import-Module "D:\home\site\wwwroot\<function_name>\azuremodules\AzureRM.Resources\AzureRM.Resources.psd1" -Global
 
 #Process alert request body
 $requestBody = Get-Content $req -Raw | ConvertFrom-Json
 
 #Storage account ID to save captures in
-$storageaccountid = "/subscriptions/9de0634c-7296-4837-9ac5-6845f367e328/resourceGroups/training/providers/Microsoft.Storage/storageAccounts/packetcaptureacb850"
+$storageaccountid = "<StorageAccountId>"
 
 #Packet capture vars
 $packetcapturename = "AutomationCapture"
@@ -133,8 +140,8 @@ if($requestBody.data.context.resourceType -eq "Microsoft.Compute/virtualMachines
 }
 ```
 
-
-To test the function, use the next test alert:
+## Notes 
+To test the function, you can use the next test alert:
 
 ```
 curl -vX POST "<URL Function>" -d @request.json --header "Content-Type: application/json" -vvvvv

@@ -1,0 +1,18 @@
+{
+    "Name":  "CustomRole",
+    "Id":  "7cd8cf2b-deff-4b46-a55b-6c0d02070c69",
+    "IsCustom":  true,
+    "Description":  "Lets you view everything, but not make any changes.",
+    "Actions":  [
+                    "*/read",
+                    "Microsoft.Compute/virtualMachines/deallocate/action",
+                    "Microsoft.Compute/virtualMachines/start/action",
+                    "Microsoft.Compute/virtualMachines/restart/action"
+                ],
+    "NotActions":  [
+
+                   ],
+    "AssignableScopes":  [
+    "/subscriptions/<subscriptionid>/resourceGroups/<resourcegroup>"
+                         ]
+}
