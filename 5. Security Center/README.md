@@ -7,6 +7,8 @@ Include Materials needed to deploy resources in Azure.
 
 ## Security Center
 
+Security Center exercises.
+
 ### Testing an alert
 
 1. Copy an executable (for example calc.exe) to the computer’s desktop, or other directory of your convenience.
