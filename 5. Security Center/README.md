@@ -20,3 +20,11 @@ We are going to use Azure Security Center.
 8. Go to "Configured", and click on "Request access".
 9. Enable Access to port 22 from your source IP for 1 hour.
 10. Verify the rules configured in the NSG in the Linux Machine. 
+
+### Testing an alert
+1. Copy an executable (for example calc.exe) to the computer’s desktop, or other directory of your convenience.
+2. Rename this file to ASC_AlertTest_662jfi039N.exe.
+3. Open the command prompt and execute this file with an argument (just a fake argument name), such as: ASC_AlertTest_662jfi039N.exe -foo.
+4. Open a Command line terminal using cmd.exe.
+5. Execute the file in a Command Line terminal, such as ASC_AlertTest_662jfi039N.exe -foo.
+6. Go to Azure Security Center and Check the alert.
