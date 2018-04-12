@@ -1,0 +1,7 @@
+search Account == "IIS APPPOOL\\vulnerator" and Process == "cmd.exe" and "cmd.exe /c " | project CommandLine, TargetAccount, TargetDomainName
+
+
+search "5156 - The Windows Filtering Platform has allowed a connection." and not (DestAddress_CF contains_cs "10.0.0") and not (DestPort_CF == 443 or DestPort_CF == 0 or SourcePort_CF == 445 or DestPort_CF == 135 or DestPort_CF == 445 or SourcePort_CF == 80 or SourcePort_CF == 53 or DestPort_CF == 53 or DestPort_CF == 389) and not(Application_CF contains_cs "monagentcore" or Application_CF contains_cs "monitoringhost" or Application_CF contains_cs "healthservice" or Application_CF contains_cs "svchost" or Application_CF contains_cs "windowsazure" or Application_CF contains_cs "lsass" or Application_CF contains_cs "wssbackup.exe" or Application_CF contains_cs "storageservice.exe" or Application_CF contains_cs "dfssvc.exe" or Application_CF contains_cs "sharedservicehost.exe" or Application_CF contains_cs "runtask.exe" or Application_CF contains_cs "browser_broker.exe" or Application_CF contains_cs "microsoft.vshub.server.httphost.exe" or Application_CF contains_cs "ssms.exe" or Application_CF contains_cs "msmpeng.exe" or Application_CF contains_cs "sqlceip.exe") 
+
+
+search Process == "powershell.exe" and ("New-Object IO.MemoryStream" or "downloadstring" or "fromBase64String" or "HKLM:\\SAM") | project CommandLine, Account, Computer

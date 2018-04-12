@@ -46,3 +46,5 @@ search Process == "powershell.exe" and ("New-Object IO.MemoryStream" or "downloa
   * Time Window: 5 minutes
   * Number of results: Greater than 1
   * Action: send an email.
+
+ 11. Exectue the powershell again.
