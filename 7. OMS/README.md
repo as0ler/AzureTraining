@@ -40,7 +40,6 @@ search Process == "powershell.exe"
 10. Configure the next alert in OMS:
 ```
 search Process == "powershell.exe" and ("New-Object IO.MemoryStream" or "downloadstring" or "fromBase64String" or "HKLM:\\SAM") | project CommandLine, Account, Computer
-// Oql: Process="powershell.exe" ("New-Object IO.MemoryStream" OR  downloadstring OR fromBase64String OR "HKLM:\\SAM") | select CommandLine, Account, Computer
 ```
 
   * Alert frequency: 5 minutes
