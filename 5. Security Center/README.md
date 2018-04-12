@@ -5,7 +5,7 @@ Materials for the Azure Training
 Include Materials needed to deploy resources in Azure.
 
 
-## Security Center
+## Azure Security Center
 
 
 ### Testing an alert
