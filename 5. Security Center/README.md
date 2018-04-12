@@ -7,6 +7,8 @@ Include Materials needed to deploy resources in Azure.
 
 ## Azure Security Center
 
+We are going to use Azure Security Center.
+
 ## Testing an alert
 1. Copy an executable (for example calc.exe) to the computer’s desktop, or other directory of your convenience.
 2. Rename this file to ASC_AlertTest_662jfi039N.exe.
