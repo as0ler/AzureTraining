@@ -7,10 +7,8 @@ Include Materials needed to deploy resources in Azure.
 
 ## Security Center
 
-Security Center exercises.
 
 ### Testing an alert
-
 1. Copy an executable (for example calc.exe) to the computer’s desktop, or other directory of your convenience.
 2. Rename this file to ASC_AlertTest_662jfi039N.exe.
 3. Open the command prompt and execute this file with an argument (just a fake argument name), such as: ASC_AlertTest_662jfi039N.exe -foo.
