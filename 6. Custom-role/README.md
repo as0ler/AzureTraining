@@ -49,7 +49,7 @@ New-AzureRmRoleDefinition -InputFile .\custom.json
 
 9. Try to start/stop a machine. You could be that is not possible.
 
-10.Now, we are going to modify the policy stored in "custom.json" file, to allow a user to restart, start and stop machines.
+10. Now, we are going to modify the policy stored in "custom.json" file, to allow a user to restart, start and stop machines.
   * Modify the file custom.json.
   * Add the actions related to actions "start", "restart", "deallocate" over virtualMachines in Microsoft.Compute provider.
 
